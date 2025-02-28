@@ -1,0 +1,393 @@
+#root{
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.urdu-font{
+    font-family: monospace;
+}
+
+/* BUtton UI */
+.btn::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #facc15;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: .5s;
+}
+.btn:hover::after{
+    transform: scaleX(1);
+}
+
+
+/* Navbar Css */
+
+.navbar.scroll-nav{
+    background: #101820;
+}
+
+.navItems a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    bottom: -1;
+    border-radius: 20px;
+    background-color: white;
+    transform-origin: center;
+    transform: scale(0);
+    transition: all .4s ease-in-out;
+}
+.navItems a:hover:after {
+    transform: scale(1);
+
+}
+.navItems a.active{
+    color: #facc15;
+}
+.navItems a.active::after{
+    transform: scale(1);
+}
+
+.cross-icon{
+    row-gap: 0 !important;
+    transition: all .3s ease;
+}
+
+.cross-icon span:first-of-type{
+    transform: translateY(2px) rotate(45deg);
+    transition-delay: .4s;
+}
+.cross-icon span:last-of-type{
+    transform: translateY(-2px) rotate(-45deg);
+    transition-delay: .4s;
+}
+.cross-icon span:nth-of-type(2){
+    opacity: 0;
+    transition-delay: .3s;
+}
+
+
+@media not all and (min-width: 768px) {
+    .unAuth-navbar{
+        width: 100%;
+        height: 0;
+        justify-content: space-around;
+        left: 0;
+        transition: all .3s ease-in;
+    }
+    .unAuth-navbar.active{
+        height: 300px;
+    }
+
+    .auth-navbar{
+        width: 270px;
+        height: 88svh;
+        justify-content: space-evenly;
+        left: -100%;
+        padding-block: 20px;
+        transition: all .3s linear;
+    }
+    .auth-navbar.active{
+        left: 0;
+    }
+    .auth-navbar .navItems{
+        padding-left: 55px;
+        padding-block: 60px;
+        border-top: 1px solid white;
+    }
+    .auth-navbar .navItems a{
+        margin-inline: initial;
+        width: fit-content;
+        opacity: 1;
+    }
+    .auth-navbar .auth-links{
+        padding-left: 42px;
+        justify-content: start;
+        border-top: 1px solid white;
+    }
+    .auth-navbar .auth-links .lang{
+        /* display: none; */
+        position: fixed;
+        top: 27px;
+        right: 80px;
+        border-right-width: 5px;
+
+    }
+    .auth-navbar .auth-links .auth-circle{
+        pointer-events: none;
+        display: none;
+    }
+    .auth-navbar .auth-links .profile{
+        transform: scale(1);
+        width: 100%;
+        background: transparent;
+        margin-top: 15px;
+    }
+    .auth-navbar .auth-links .profile .info:hover{
+        color: #facc15;
+    }  
+}
+
+
+
+/* Footer CSS */
+
+.footer .links a{
+    width: fit-content;
+    transition: all .4s;
+}
+.footer .links a:hover{
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 804px) {
+    .footer .links a{
+        font-size: smaller;
+    }
+    .footer .links h5{
+        font-size: small;
+    }
+}
+
+
+
+/* Login input Css */
+
+.input-div.focus .icon {
+    color: #facc15;
+}
+
+.input-div.focus div h5 {
+    top: -5px;
+    font-size: 14px;
+}
+
+.input-div::after,
+.input-div::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background-color: #facc15;
+    transition: all .3s;
+}
+
+.input-div::after {
+    right: 50%;
+}
+
+.input-div::before {
+    left: 50%;
+}
+
+.input-div.focus::after,
+.input-div.focus::before {
+    width: 50%;
+}
+
+.remove-input-arrows::-webkit-inner-spin-button,
+.remove-input-arrows::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+/* SignUp Css */
+
+.signUp .box:hover {
+    color: white;
+    background: #facc15;
+}
+
+.signUp .box:hover .icon {
+    color: white;
+}
+
+.signUp .box.active{
+    background: #facc15;
+}
+.signUp .box.active .icon{
+    color: #fff;
+}
+.signUp .box.active{
+    color: white;
+}
+
+
+/* Card cirlce */
+.circle{
+    clip-path: circle();
+}
+
+.circle::before{
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -12px;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 0 0 20px rgba(234, 179, 8, 0.8);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.circle .imgBox:hover img{
+    transform: scale(1.2);
+}
+
+
+/* Service Card css */
+
+.serviceCard .imgBox::before{
+    content: '';
+    position: absolute;
+    bottom: -180px;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg,#101820 20%,  transparent);
+    transition: .5s;
+    z-index: 1;
+}
+
+.serviceCard:hover .imgBox::before{
+    backdrop-filter: blur(2px);
+    bottom: 0;
+}
+
+.serviceCard:hover .detials{
+    bottom: 5px;
+}
+
+
+
+/* service_categories css */
+
+.service_categories .main_category_card{
+    border-radius: 24px;
+    transition: all .9s ease 0s;
+}
+
+.service_categories .main_category_card:hover h2{
+    color: #101820;
+    border-bottom-color: #101820;
+}
+
+.service_categories .main_category_card:hover p{
+    display: block;
+    transition-duration: 0s;
+}
+
+.service_categories .main_category_card:hover .icon{
+    font-size: 85px;
+    transition: .7s;
+    color: white;
+}
+
+@media (max-width: 1024px) {
+    .service_categories .main_category_card:hover .icon{
+        font-size: 70px;
+    }
+}
+
+.service_categories .main_category_card:hover{
+    background: #facc15;
+}
+
+.single_category_card:hover span{
+    animation: indicator 1s linear infinite;
+}
+
+
+@keyframes indicator {
+    0%{
+        transform: translateX(0px);
+    }
+    50%{
+        transform: translateX(8px);
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
+
+
+/* why Choose Us Css */
+
+.choose_Us_section .card:hover{
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+}
+
+
+ /* Service Activation toggle */
+.toggle-checkbox {
+  appearance: none;
+  width: 2rem;
+  height: 1rem;
+  background-color: #d1d5db;
+  border-radius: 9999px;
+  position: relative;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.toggle-checkbox:checked {
+  background-color: #34d399;
+}
+
+.toggle-checkbox::after {
+  content: "";
+  position: absolute;
+  top: .54px;
+  left: 1px;
+  width: 0.875rem;
+  height: 0.875rem;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s ease-in-out;
+}
+
+.toggle-checkbox:checked::after {
+  transform: translateX(1rem);
+}
+
+
+/* .service_categories .card{
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    box-shadow: 8px 8px 16px #d1d1d1,
+                -8px -8px 16px #ffffff;
+    transition: .3s;
+}
+.service_categories .card:hover{
+    background: linear-gradient(145deg, #bb0738, #ff3366);
+    box-shadow: 8px 8px 16px #d1d1d1,
+                -8px -8px 16px #ffffff;
+}
+
+.service_categories .card:hover h2,
+.service_categories .card:hover p{
+    color: #fafafa;
+}
+.service_categories .card:hover .ic{
+    margin-top: 0;
+    color: #fff;
+}
+.service_categories .card:hover .arrow{
+    color: #fff;
+    display: block;
+} */
