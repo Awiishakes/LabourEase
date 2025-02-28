@@ -1,0 +1,256 @@
+import { useCallback, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import ServiceDetialsLoader from "../Loaders/ServiceDetialsLoader";
+import { RiImageAddFill } from "react-icons/ri";
+import { BiArrowBack, BiTrash } from "react-icons/bi";
+import { UpdateServiceSchema } from "../../validations";
+import FormSubmitLoader from "../Loaders/FormSubmitLoader";
+import { mainCategories } from "../../data/serviceMainCategories";
+
+
+const ServiceDetials = () => {
+  
+  const { id } = useParams()
+  const navigateTo = useNavigate()
+  const validation = UpdateServiceSchema()
+  const [readOnly, setReadOnly] = useState(true);
+  const [loading, setLoading] = useState(true);
+  
+  // React Hook Form setup
+  const { register, handleSubmit, reset, watch, setValue, 
+    formState: { errors, isSubmitting }, } = useForm({resolver:yupResolver(validation)});
+
+  const getMyService = useCallback(async () =>{
+    try {
+      const { data } = await axios.get(`http://localhost:4000/api/admin/getService/${id}`, { withCredentials: true })
+      const service = data.myService[0]
+      reset(service)
+      setValue('salaryType',service.fixedSalary? 'fixed':'range')
+      setLoading(true)
+    } catch (error) {
+      toast.error(error.response.data.message)
+      navigateTo('/service-management')
+    }finally{
+      setLoading(false)
+    }
+  }, [id, navigateTo, reset, setValue])
+
+  useEffect(() => {
+    getMyService()
+  }, [getMyService, id]);
+
+  const category = watch("category");
+  const isActive = watch("active");
+  const image = watch("image");
+  const salaryType = watch("salaryType");
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+
+    if (salaryType === 'fixed') {
+      formData.append('fixedSalary', data.fixedSalary);
+    }else{
+      formData.append('salaryFrom', data.salaryFrom);
+      formData.append('salaryTo', data.salaryTo);
+    }
+
+    const filter = ['salaryType', 'fixedSalary', 'salaryFrom', 'salaryTo']
+    for(const key in data){
+      if (!filter.includes(key)) {
+        if (key === 'image' && data[key]) {
+          formData.append(key, data[key][0])
+        }else{
+          formData.append(key, data[key]);
+        }
+      }
+    }
+    
+    await axios.put(`http://localhost:4000/api/admin/updateService/${id}`, formData, { withCredentials: true })
+    .then((res)=>{
+      toast.success(res.data.message)
+      setReadOnly(true); // Switch back to read-only mode
+    })
+    .catch((err)=>toast.error(err.response.data.message))
+  };
+  
+  const handleToggle = async (active) => {
+    await axios.patch(`http://localhost:4000/api/work/updateStatus/${id}`, { active }, { withCredentials:true })
+    .then((res)=>toast.success(res.data.message))
+    .catch((err)=>toast.error(err.response.data.message))   
+  }
+  
+  const handleCancel = () => {
+    getMyService()
+    setReadOnly(true); // Switch back to read-only mode
+  }
+
+  if (loading) { return <ServiceDetialsLoader /> }
+  
+  return (
+    <div className='p-4'>
+      {isSubmitting && <FormSubmitLoader />}
+      <Link to={'/service-management'} className="bg-[#101820] text-white px-4 py-2 rounded-md shadow-md">
+          <BiArrowBack className='inline' />
+      </Link>
+
+      <div className="flex justify-between items-center mt-4">
+        <h2 className="text-2xl font-semibold">Service Details</h2>
+        {readOnly ? (
+            <button onClick={() => setReadOnly(false)} className="bg-blue-500 text-white px-4 py-2 rounded">
+              Edit
+            </button>
+        ) : (
+          <div>
+            <button onClick={handleSubmit(onSubmit)} className="bg-green-500 text-white px-4 py-2 rounded mr-2" disabled={isSubmitting} >
+              Save
+            </button>
+            <button onClick={handleCancel} className="bg-red-500 text-white px-4 py-2 rounded">
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>
+
+      <form className='sm:grid sm:grid-cols-2 gap-4 mt-4'>
+        {/* Service Image */}
+        <div className='relative flex gap-x-4 sm:col-span-3 '>
+          <div className={`relative w-[45%] pt-[35.5%] bg-gray-100 border ${errors.image && 'border border-red-500'} rounded-md overflow-hidden`}>
+              {image ? (
+                <>
+                  <img src={image.url? image.url: URL.createObjectURL(image[0])} alt={'Service Image'} className="absolute top-0 left-0 w-full h-full object-fill" />
+                  {!readOnly &&
+                    <button type="button" onClick={() => setValue('image',null)}
+                      className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 shadow-md">
+                      <BiTrash />
+                    </button>
+                  }
+                </>
+              ) : (
+                  <>
+                    <input type="file" id={'uploadImage'} accept="image/*" className="hidden" {...register('image')}/>
+                    <label htmlFor={'uploadImage'} className="absolute top-2 right-2 bg-yellow-400 text-white rounded-full p-1 shadow-md cursor-pointer">
+                      <RiImageAddFill color="#101820"/>
+                    </label>
+                  </>
+              )}
+            {errors.image && ( <p className="absolute left-0 right-0 bottom-0 z-[1] text-red-500 text-center">{errors.image.message}</p>)}
+          </div>
+
+            <div className="flex items-start space-x-2">
+                <input type="checkbox" {...register('active')} id="activeToggle" 
+                    className="toggle-checkbox" onClick={(e)=> readOnly && handleToggle(e.currentTarget.checked)} />
+                <label htmlFor="activeToggle" className="text-sm font-medium">
+                    {isActive ? "Active" : "Inactive"}
+                </label>
+            </div>
+        </div>
+
+        <Input name={'title'} type={'text'} register={register} readOnly={readOnly} errors={errors.title} />
+
+        <div className="">
+            <label className="block font-semibold">Category</label>
+            <select disabled={readOnly} {...register("category")}
+            className={`w-full px-4 py-2 border rounded-md focus:outline outline-2 ${
+              readOnly ? "bg-gray-200 cursor-default focus:outline-none" : ""
+            } ${errors.category ? "border-red-500" : ""}`}
+            >
+              <option className="text-[#101820]" value="">Select category</option>
+              {mainCategories.find(item=> item.subCategories.includes(category)).subCategories
+                .map((category, key)=> 
+                    <option key={key} className="text-[#101820]" value={category}>{category}</option>
+                )
+              }
+            </select>
+            {errors.category && <p className="text-red-500 text-sm">{errors.category.message}</p>}
+        </div>
+
+        <div className='col-span-2'>
+            <label className="block font-semibold">City</label>
+            <select disabled={readOnly} {...register("city")}
+            className={`w-full px-4 py-2 border rounded-md focus:outline outline-2 ${
+              readOnly ? "bg-gray-200 cursor-default focus:outline-none" : ""
+            } ${errors.city ? "border-red-500" : ""}`}
+            >
+              <option className="text-[#101820]" value="">Select city</option>
+              <option className="text-[#101820]" value="hyderabad">Hyderabad</option>
+              <option className="text-[#101820]" value="latifabad">Latifabad</option>
+              <option className="text-[#101820]" value="paretabad">Paretabad</option>
+            </select>
+            {errors.city && <p className="text-red-500 text-sm">{errors.city.message}</p>}
+        </div>
+
+        <div className="col-span-3 grid grid-cols-2 gap-x-3">
+          {/* Start Time */}
+          <Input name={'startTime'} type={'time'} register={register} readOnly={readOnly} errors={errors.startTime} />
+          {/* End Time */}
+          <Input name={'endTime'} type={'time'} register={register} readOnly={readOnly} errors={errors.endTime} />
+        </div>
+
+        {/* Price */}
+        <div className="col-span-3">
+            {/* Salary Type */}
+            <div>
+              <label className="block font-semibold">Salary Type</label>
+              <div className="flex space-x-4 mb-2">
+                  <label className="flex items-center">
+                    <input type="radio" value="fixed" disabled={readOnly} {...register("salaryType")} className="mr-2" />
+                    Fixed Salary
+                  </label>
+                  <label className="flex items-center">
+                    <input type="radio" value="range" disabled={readOnly} {...register("salaryType")} className="mr-2" />
+                    Salary Range
+                  </label>
+              </div>
+              {errors.salaryType && <p className="text-red-500 text-sm">{errors.salaryType.message}</p>}
+            </div>
+
+            {/* Fixed Salary */}
+            {salaryType == "fixed" && (
+              <Input name={'fixedSalary'} type={'number'} register={register} readOnly={readOnly} errors={errors.fixedSalary} />
+            )}
+
+            {/* Salary Range */}
+            {salaryType === "range" && (
+            <div className="sm:flex gap-x-4">
+              <div className="flex-1">
+                <Input name={'salaryFrom'} type={'number'} register={register} readOnly={readOnly} errors={errors.salaryFrom} />
+              </div>
+              <div className="flex-1">
+                <Input name={'salaryTo'} type={'number'} register={register} readOnly={readOnly} errors={errors.salaryTo} />
+              </div>
+            </div>
+            )}
+        </div>
+
+        <div className='sm:col-span-2 '>
+          <label className="block font-semibold">Description:</label>
+          <textarea {...register("description")} readOnly={readOnly}
+            className={`w-full px-4 py-2 border rounded-md ${
+              readOnly ? "bg-gray-200 cursor-default focus:outline-none" : ""
+            } ${errors.description ? "border-red-500" : ""}`}
+          />
+          {errors.description && ( <p className="text-red-500 text-sm">{errors.description.message}</p> )}
+        </div>
+      </form>
+    </div>
+  );
+};
+export default ServiceDetials;
+
+const Input = ({name, type, register, readOnly, errors}) =>{
+  return(
+    <div>
+      <label className="block font-semibold capitalize">{name}</label>
+      <input type={type} {...register(name)} readOnly={readOnly}
+        className={`w-full px-4 py-2 border rounded-md ${
+          readOnly ? "bg-gray-200 cursor-default focus:outline-none" : ""
+        } ${errors ? "border-red-500" : ""}`}
+      />  
+      {errors && (<p className="text-red-500 text-sm">{errors.message}</p>)}
+    </div>
+  )
+}
