@@ -57,7 +57,7 @@ function Home() {
   return (
     <>
       <header className='w-full h-full relative'>
-        <div className='h-[52svh] min-[500px]:h-[75svh] sm:h-[85svh] overflow-hidden bg-cover bg-center' style={{ backgroundImage: `url(${h4Image})`}}>
+        <div className='h-[52vh] min-[500px]:h-[75vh] sm:h-[85vh] overflow-hidden bg-cover bg-center' style={{ backgroundImage: `url(${h4Image})`}}>
           <div className="overlay absolute top-0 left-0 right-0 bottom-0 bg-opacity-70 bg-[#162330c0]"></div>
             <div className='w-[calc(100%+25px)] h-1/4 absolute -left-2 bottom-0 rotate-2 '>
                 <svg className='absolute -bottom-4 min-[400px]:-bottom-5 sm:-bottom-7 min-[954px]:-bottom-9 ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
