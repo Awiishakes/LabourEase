@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react'
-import img1 from '../../images/img1.jpg'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import Request from '../Requests/Request'
 import axios from 'axios'
@@ -40,7 +39,7 @@ const ServiceCard = ({id, image, title, desc, ratings, startTime, endTime, price
             
             <div className="bg-[#101820] shadow-lg rounded-xl max-sm:p-4 flex sm:flex-col flex-row sm:items-center items-start overflow-hidden">
                 <div className="sm:w-full w-2/5">
-                    <img src={image?.url || img1} alt={title} className='w-full h-36 min-[500px]:h-44 object-fill'  />
+                    <img src={image?.url || ''} alt={title} className='w-full h-36 min-[500px]:h-44 object-fill'  />
                 </div>
 
                 <div className="sm:w-full w-3/5 max-sm:ml-4 flex flex-col justify-between h-full sm:p-4">
