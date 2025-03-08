@@ -12,7 +12,7 @@ const About = () => {
   return (
     <div className="min-h-screen text-gray-800 lg:mt-6">
       {/* Hero Section */}
-      <header className='w-full h-[60svh] min-[500px]:h-[80svh] lg:h-[85svh] relative'>
+      <header className='w-full h-[60vh] min-[500px]:h-[80vh] lg:h-[85vh] relative'>
         <div className='w-full h-full bg-[#101820] mb-4 overflow-hidden'>
             <div className='w-[calc(100%+25px)] h-1/4 absolute -left-2 bottom-0 rotate-1'>
                 <svg className='absolute bottom-2 min-[692px]:-bottom-5 min-[836px]:-bottom-7 lg:-bottom-9' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
