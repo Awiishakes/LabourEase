@@ -119,7 +119,7 @@ const ForgetPassword = () => {
   }, [cleaTimer, state.otp])
 
   const handlePasswordReset = useCallback(({cnic, newPassword}) => {
-    axios.post('http://localhost:4000/api/user/forgetPassword/resetPassword',{ cnic, newPassword })
+    axios.post('https://ingenious-perfection-production.up.railway.app/api/user/forgetPassword/resetPassword',{ cnic, newPassword })
     .then((res)=>{
       toast.success(res.data.message)
       navigateTo('/login')
