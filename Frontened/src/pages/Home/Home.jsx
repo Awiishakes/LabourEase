@@ -27,7 +27,7 @@ function Home() {
       .then((res)=> {
         setPosts({services: res.data.services, filterServices: res.data.services})
       })
-      .catch((err)=>toast.error(err.message))
+      .catch((err)=>toast.error(err.data.message))
     } 
     // scrollTo(0,0)
     getAllPosts()
