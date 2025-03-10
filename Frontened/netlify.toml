@@ -1,5 +1,5 @@
 [[redirects]]
-  /api/* https://ingenious-perfection-production.up.railway.app/:splat 200!
+  /api/* https://ingenious-perfection-production.up.railway.app
   from = "/*"
   to = "/index.html"
   status = 200
