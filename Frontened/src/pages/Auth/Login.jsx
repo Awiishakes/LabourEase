@@ -32,7 +32,7 @@ const Login = () => {
   // Handle form submission
   const login = async ({ cnic, password }) => {
     try {
-      const { data } = await axios.post('https://ingenious-perfection-production.up.railway.app/api/user/login', { cnic, password }, {
+      const { data } = await axios.post('/api/user/login', { cnic, password }, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json"
