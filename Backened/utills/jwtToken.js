@@ -7,6 +7,7 @@ export const sendToken = (user, statusCode, res, message) => {
             ),
             httpOnly: true,
             secure: true,
+            domain: "https://ingenious-perfection-production.up.railway.app",
             sameSite: "none",
         },
         {
@@ -14,6 +15,7 @@ export const sendToken = (user, statusCode, res, message) => {
                 Date.now() + process.env.COOKIE_EXPIRE * 24 * 60 * 60 * 1000
             ),
             secure: true,
+            domain: "https://ingenious-perfection-production.up.railway.app",
             sameSite: "none",
         }
     ]
