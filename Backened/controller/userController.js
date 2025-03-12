@@ -47,12 +47,6 @@ export const login = catchAsyncError(async (req, res, next) => {
     if (!isPassword) {
         return next(new ErrorHandler('Ivalid CNIC or password!', 400))
     }
-res.cookie('token', 'your-token', {
-      httpOnly: true, // Prevent client-side JavaScript from accessing the cookie
-      secure: true, // Only send cookies over HTTPS
-      sameSite: 'none', // Required for cross-origin cookies
-      maxAge: 24 * 60 * 60 * 1000, // Cookie expires in 1 day
-    });
     sendToken(user, 200, res, 'User logged in successfully!')
 })
 
