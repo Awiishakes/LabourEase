@@ -1,7 +1,7 @@
 {
   "name": "frontened",
   "private": true,
-  "proxy": "https://labourease-production-8f25.up.railway.app/",
+  "proxy": "https://82674b07-723f-4b5c-8aed-5a5ca77d7c31.e1-us-east-azure.choreoapps.dev",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
