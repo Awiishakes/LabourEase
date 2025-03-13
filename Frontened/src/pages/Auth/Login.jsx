@@ -32,7 +32,7 @@ const Login = () => {
   // Handle form submission
   const login = async ({ cnic, password }) => {
     try {
-      const { data } = await axios.post('https://labourease-production-8f25.up.railway.app/api/user/login', { cnic, password }, {
+      const { data } = await axios.post('https://82674b07-723f-4b5c-8aed-5a5ca77d7c31.e1-us-east-azure.choreoapps.dev/api/user/login', { cnic, password }, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json"
