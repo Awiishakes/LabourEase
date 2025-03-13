@@ -15,7 +15,7 @@ dotenv.config({path: './config/config.env'})
 
 
 app.use(cors({
-    origin: 'https://labourease-production.up.railway.app',
+    origin: 'https://labourease.netlify.app',
     method: ['GET', 'POST', 'DELETE', 'PUT'],
     credentials: true
 }))
