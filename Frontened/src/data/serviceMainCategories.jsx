@@ -3,7 +3,6 @@ import { GiLipstick } from 'react-icons/gi'
 import ac from '../assets/ac mechanic.jpg'
 import car from '../assets/car mechanic 2.jpg'
 import electrician from '../assets/electrician vector.jpg'
-import maid from '../assets/maid vector .jpg'
 import painter from '../assets/painter vector .jpg'
 import plumber from '../assets/plumber vector.jpg'
 
@@ -53,7 +52,7 @@ export const singleCategorie = [
         category: 'dailyServices'
     },
     {
-        img: <img src={maid} alt="Ac Mechanic" className='w-full h-full object-fill object-center' />,
+        img: <img src={painter} alt="Ac Mechanic" className='w-full h-full object-fill object-center' />,
         title: 'Maid Service',
         category: 'dailyServices'
     },
