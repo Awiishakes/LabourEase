@@ -44,24 +44,24 @@ export const en = {
         ],
         
         teamTitleP1: "Meet Our",
-        teamTitleP2: "Team",
-        teamMembers: [
-            {
-                name: "Hassan",
-                role: "Front-End Developer",
-                description: "Hassan is our budding front-end developer, dedicated to creating responsive and intuitive user interfaces that offer a seamless experience."
-            },
-            {
-                name: "Awais",
-                role: "Full Stack MERN Developer",
-                description: "Awais is our expert full-stack developer. With mastery over the MERN stack, he ensures that our platform is robust, scalable, and secure."
-            },
-            {
-                name: "Asim",
-                role: "Content Writer & Data Collector",
-                description: "Asim is our creative mind behind the content. He gathers essential data and crafts compelling narratives that drive our project's vision."
-            }
-        ],
+        teamTitleP2: "Developer",
+        developer: {
+            name: "Awais",
+            role: "Full Stack MERN Developer",
+            description: "Awais is our expert full-stack developer, With mastery over the MERN stack, he ensures that our platform is robust, scalable, and secure. As frontend he dedicated to creating responsive and intuitive user interfaces that offer a seamless experience"
+        },
+        // teamMembers: [
+            // {
+            //     name: "Hassan",
+            //     role: "Front-End Developer",
+            //     description: "Hassan is our budding front-end developer, dedicated to creating responsive and intuitive user interfaces that offer a seamless experience."
+            // },
+            // {
+            //     name: "Asim",
+            //     role: "Content Writer & Data Collector",
+            //     description: "Asim is our creative mind behind the content. He gathers essential data and crafts compelling narratives that drive our project's vision."
+            // }
+        // ],
         
         footerText: "© " + new Date().getFullYear() + " Our Project. All rights reserved."
     },

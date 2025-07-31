@@ -6,7 +6,7 @@ import UrduFont from '../../components/utills/UrduFont';
 
 const About = () => {
   
-  const teamMembers = [hassan, awais, asim]
+  // const teamMembers = [hassan, awais, asim]
   const { t } = useTranslation()
   
   return (
@@ -59,22 +59,22 @@ const About = () => {
           <h1 className='text-center text-4xl text-yellow-500 font-bold mb-5'>
             <UrduFont><span className='text-[#101820]'>{t('aboutPage.teamTitleP1')} </span> {t('aboutPage.teamTitleP2')}</UrduFont>
           </h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="">
             {/* Team Member 1: Awais */}
-            {teamMembers.map((member, i)=>{
-              return(
-                <div key={i} className="bg-[#101820] shadow-lg rounded-lg p-6 text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden border-4 border-yellow-500">
-                    <img src={member} alt={t(`aboutPage.teamMembers.${i}.name`)} className="w-full h-full object-fill text-white/60" />
+            {/* {teamMembers.map((member, i)=>{
+              return( */}
+                <div  className="bg-[#101820] shadow-lg rounded-lg p-6 text-center max-w-screen-md mx-auto">
+                  <div className="w-36 h-36 mx-auto mb-4 rounded-xl overflow-hidden border-4 border-yellow-500">
+                    <img src={awais} alt={t('aboutPage.developer.name')} className="w-full h-full object-fill text-white/60" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 text-gray-200"><UrduFont>{t(`aboutPage.teamMembers.${i}.name`)}</UrduFont></h3>
-                  <p className="text-lg font-medium text-yellow-400 mb-2"><UrduFont>{t(`aboutPage.teamMembers.${i}.role`)}</UrduFont></p>
+                  <h3 className="text-2xl font-bold mb-2 text-gray-200"><UrduFont>{t('aboutPage.developer.name')}</UrduFont></h3>
+                  <p className="text-lg font-medium text-yellow-400 mb-2"><UrduFont>{t('aboutPage.developer.role')}</UrduFont></p>
                   <p className="text-gray-400">
-                    <UrduFont>{t(`aboutPage.teamMembers.${i}.description`)}</UrduFont>
+                    <UrduFont>{t('aboutPage.developer.description')}</UrduFont>
                   </p>
                 </div>
-              )
-            })}
+              {/* )
+            })} */}
           </div>
         </div>
       </section>
