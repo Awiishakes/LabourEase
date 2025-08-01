@@ -8,8 +8,8 @@ export default function ContextHolder (props) {
 
     // const [isAuthorized, setIsAuthorized] = useState(document.cookie.includes('checkToken'))
     // const [loading, setLoading] = useState(document.cookie.includes('checkToken') || true)
-    const [isAuthorized, setIsAuthorized] = useState(localStorage.getItem('token').length>0)
-    const [loading, setLoading] = useState(localStorage.getItem('token').length>0 || true)
+    const [isAuthorized, setIsAuthorized] = useState(localStorage.getItem('token')?.length>0)
+    const [loading, setLoading] = useState(localStorage.getItem('token')?.length>0 || true)
     const [user, setUser] = useState(null)
     const [role, setRole] = useState(localStorage.getItem('role')? ['client','worker'].includes(localStorage.getItem('role'))&& localStorage.getItem('role') : 'visitor')
     const [filter, setFilter] = useState({type:'', indicator:false})
@@ -63,10 +63,10 @@ export default function ContextHolder (props) {
             setLoading(false)
           }
         }
-        if (localStorage.getItem('token').length>0) {
+        if (localStorage.getItem('token')?.length>0) {
           fetchUser()
         }
-      }, [localStorage.getItem('token').length>0])
+      }, [localStorage.getItem('token')?.length>0])
 
 return (
     <Context.Provider value={{isAuthorized, setIsAuthorized, user, setUser, filter, setFilter, handleFilter, setRole, role, loading, setLoading }}>
