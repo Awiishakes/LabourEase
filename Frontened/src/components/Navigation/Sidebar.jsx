@@ -18,7 +18,7 @@ const Sidebar = () => {
   const logOut = async () => {
     setLoading(true)
     setRole('visitor')
-    localStorage.setItem('role','visitor')
+    localStorage.removeItem('role')
     localStorage.removeItem('token')
     // try {
     //   const response = await axios.get('https://labourease-production.up.railway.app/api/user/logout', { withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} })
