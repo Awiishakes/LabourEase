@@ -18,6 +18,7 @@ export default function ContextHolder (props) {
     }
 
     useEffect(() => {
+        console.log(document.cookie.includes('checkToken'))
         const fetchUser = async () => {
             try {
                 setLoading(true)
