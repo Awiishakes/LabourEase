@@ -32,6 +32,7 @@ const Register = () => {
           }
         })
         toast.success(data.message)
+        localStorage.setItem('token',data.token)
         localStorage.setItem('role',data.user.role)
         setIsAuthorized(true)
       } catch (error) {
