@@ -30,7 +30,7 @@ const Service = () => {
             !show('/service') && navigateTo('/service')
             setIsSearched(true)
     
-            axios.get(`http://localhost:4000/api/work/services?search=${search}`)
+            axios.get(`https://labourease-production.up.railway.app/api/work/services?search=${search}`)
             .then((res)=>{
                 setPosts({results: res.data.services, filterResults: res.data.services})
             })

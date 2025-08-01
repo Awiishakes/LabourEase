@@ -32,7 +32,7 @@ const ServiceDetials = () => {
 
   const getMyService = useCallback(async () =>{
     try {
-      const { data } = await axios.get(`http://localhost:4000/api/work/getMyService/${id}`, { withCredentials: true })
+      const { data } = await axios.get(`https://labourease-production.up.railway.app/api/work/getMyService/${id}`, { withCredentials: true })
       const service = data.myService[0]
       reset(service)
       setValue('salaryType',service.fixedSalary? 'fixed':'range')
@@ -74,7 +74,7 @@ const ServiceDetials = () => {
       }
     }
     
-    await axios.put(`http://localhost:4000/api/work/update/${id}`, formData, { withCredentials: true })
+    await axios.put(`https://labourease-production.up.railway.app/api/work/update/${id}`, formData, { withCredentials: true })
     .then((res)=>{
       toast.success(res.data.message)
       setReadOnly(true); // Switch back to read-only mode
@@ -83,7 +83,7 @@ const ServiceDetials = () => {
   };
   
   const handleToggle = async (active) => {
-    await axios.patch(`http://localhost:4000/api/work/updateStatus/${id}`, { active }, { withCredentials:true })
+    await axios.patch(`https://labourease-production.up.railway.app/api/work/updateStatus/${id}`, { active }, { withCredentials:true })
     .then((res)=>toast.success(res.data.message))
     .catch((err)=>toast.error(err.response.data.message))   
   }
@@ -95,7 +95,7 @@ const ServiceDetials = () => {
 
   const onRequestSubmit = async (formData) =>{
       try {
-          const {data} = await axios.post('http://localhost:4000/api/request/postRequest', formData,
+          const {data} = await axios.post('https://labourease-production.up.railway.app/api/request/postRequest', formData,
               {
                   withCredentials: true, 
                   headers: { "Content-Type": "multipart/form-data" }

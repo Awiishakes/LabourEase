@@ -23,7 +23,7 @@ const SubCategories = () => {
 
     const filterData = singleCategorie.filter((item) => item.category === filter.type)
     const getAllPosts = useCallback(async ()=>{
-        await axios.get('http://localhost:4000/api/work/getAll')
+        await axios.get('https://labourease-production.up.railway.app/api/work/getAll')
         .then((res)=> setPosts(res.data.services))
         .catch((err)=>toast.error(err.response?.data.message || err.message))
     }, [])

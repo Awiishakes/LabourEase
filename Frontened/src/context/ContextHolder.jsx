@@ -21,7 +21,7 @@ export default function ContextHolder (props) {
         const fetchUser = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get('http://localhost:4000/api/user/getuser', { withCredentials: true })
+                const response = await axios.get('https://labourease-production.up.railway.app/api/user/getuser', { withCredentials: true })
                 setUser(response.data.user)
                 setIsAuthorized(['client','worker','visitor'].includes(response.data.user.role)?true:false)
                 localStorage.setItem('role',['client','worker','visitor'].includes(response.data.user.role)? response.data.user.role : '')

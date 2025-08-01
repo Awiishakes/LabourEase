@@ -43,7 +43,7 @@ const AddService = () => {
         formData.append('endTime', data.endTime);
         formData.append('image', data.image);
         
-        await axios.post('http://localhost:4000/api/work/postService', formData,
+        await axios.post('https://labourease-production.up.railway.app/api/work/postService', formData,
         {
             withCredentials: true, 
             headers: {

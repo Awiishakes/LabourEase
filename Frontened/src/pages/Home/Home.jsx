@@ -23,7 +23,7 @@ function Home() {
 
   useEffect(() => {
     const getAllPosts = async ()=>{
-      await axios.get('http://localhost:4000/api/work/getAll')
+      await axios.get('https://labourease-production.up.railway.app/api/work/getAll')
       .then((res)=> {
         setPosts({services: res.data.services, filterServices: res.data.services})
       })

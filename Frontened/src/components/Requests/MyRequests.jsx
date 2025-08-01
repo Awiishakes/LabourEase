@@ -28,7 +28,7 @@ const MyRequests = () => {
   const fetchRequests = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:4000/api/request/getAll", { withCredentials: true })
+      const response = await axios.get("https://labourease-production.up.railway.app/api/request/getAll", { withCredentials: true })
       setRequests(response.data.data)
     } catch (error) {
       console.error("Failed to fetch requests:", error)
@@ -51,7 +51,7 @@ const MyRequests = () => {
   const handleDelete = useCallback(async () => {
     try {
       setDeleting(true)
-      const res = await axios.delete(`http://localhost:4000/api/request/delete/${statusData.id}`,{ withCredentials: true })
+      const res = await axios.delete(`https://labourease-production.up.railway.app/api/request/delete/${statusData.id}`,{ withCredentials: true })
       toast.success(res.data.message);
       setRequests((prevRequests) => prevRequests.filter((req) => req._id !== statusData.id))
     } catch (error) {
@@ -62,7 +62,7 @@ const MyRequests = () => {
   // Accept or Reject a request
   const handleRequestStatus = useCallback(async () => {
     try {
-      const res = await axios.patch(`http://localhost:4000/api/request/updateStatus/${statusData.id}`, { status: statusData.status }, { withCredentials: true })
+      const res = await axios.patch(`https://labourease-production.up.railway.app/api/request/updateStatus/${statusData.id}`, { status: statusData.status }, { withCredentials: true })
       statusData.status != 'completed' && toast.success(res.data.message)
       fetchRequests()
     } catch (error) {
@@ -80,7 +80,7 @@ const MyRequests = () => {
   // Ratings for worker
   const handleRatings = useCallback(async (ratings) => {
     try {
-      await axios.patch(`http://localhost:4000/api/work/updateRatings/${statusData.id}`, { ratings }, { withCredentials: true })
+      await axios.patch(`https://labourease-production.up.railway.app/api/work/updateRatings/${statusData.id}`, { ratings }, { withCredentials: true })
       handleRequestStatus()
       toast.success('payment released succesfully')
     } catch (error) {

@@ -39,7 +39,7 @@ function Navbar() {
     setLoading(true)
     setRole('visitor')
     try {
-      const response = await axios.get('http://localhost:4000/api/user/logout', { withCredentials: true })
+      const response = await axios.get('https://labourease-production.up.railway.app/api/user/logout', { withCredentials: true })
       toast.success(response.data.message)
       localStorage.removeItem('role')
       setIsAuthorized(false)

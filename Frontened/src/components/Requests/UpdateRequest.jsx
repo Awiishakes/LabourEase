@@ -46,7 +46,7 @@ const UpdateRequest = () => {
   useEffect(() => {
     const getMyRequest = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/request/getMyRequest/${id}`, { withCredentials: true });
+        const res = await axios.get(`https://labourease-production.up.railway.app/api/request/getMyRequest/${id}`, { withCredentials: true });
         const { name, contact, address, city, date, time, salary, description, coord, workId, images } = res.data.request;
         reset({
           name, contact, address, city, date: date.slice(0, 10), time, salary, description, title: workId.title,
@@ -92,7 +92,7 @@ const UpdateRequest = () => {
       formData.append('images', JSON.stringify(updatedImages))
       formData.append('coord', JSON.stringify(state.coord))
 
-      const res = await axios.put(`http://localhost:4000/api/request/update/${id}`, formData, { withCredentials: true });
+      const res = await axios.put(`https://labourease-production.up.railway.app/api/request/update/${id}`, formData, { withCredentials: true });
       toast.success(res.data.message);
       handleEditModeToggle();
     } catch (err) {
@@ -106,7 +106,7 @@ const UpdateRequest = () => {
 
   const handleRequestStatus = useCallback(async () => {
     try {
-      const res = await axios.patch(`http://localhost:4000/api/request/updateStatus/${id}`, { status: state.status }, { withCredentials: true });
+      const res = await axios.patch(`https://labourease-production.up.railway.app/api/request/updateStatus/${id}`, { status: state.status }, { withCredentials: true });
       toast.success(res.data.message);
       setState((prev) => ({ ...prev, buttonStatus: state.status, isOpen: false }));
       if (state.status === 'rejected') navigateTo('/worker/requests');

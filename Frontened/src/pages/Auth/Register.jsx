@@ -25,7 +25,7 @@ const Register = () => {
   const signUp = async ({ role, name, cnic, contact, password, confirmPassword }) => {
     if (confirmPassword === password) {
       try {
-        const { data } = await axios.post('http://localhost:4000/api/user/register', { name, cnic, contact, role, password }, {
+        const { data } = await axios.post('https://labourease-production.up.railway.app/api/user/register', { name, cnic, contact, role, password }, {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json"

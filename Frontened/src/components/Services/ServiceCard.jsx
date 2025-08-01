@@ -15,7 +15,7 @@ const ServiceCard = ({id, image, title, desc, ratings, startTime, endTime, price
 
     const onSubmit = useCallback(async (formData) =>{
         try {
-            const {data} = await axios.post('http://localhost:4000/api/request/postRequest', formData,
+            const {data} = await axios.post('https://labourease-production.up.railway.app/api/request/postRequest', formData,
                 {
                     withCredentials: true, 
                     headers: { "Content-Type": "multipart/form-data" }

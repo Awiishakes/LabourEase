@@ -70,7 +70,7 @@ const ForgetPassword = () => {
   // Handle National ID submission
   const handleCnicSubmit = async ({cnic}) => {
     try {
-      const { data } = await axios.post("http://localhost:4000/api/user/forgetPassword/verifyId", { cnic });
+      const { data } = await axios.post("https://labourease-production.up.railway.app/api/user/forgetPassword/verifyId", { cnic });
       setState((prev)=>({...prev, number: data.contact, step: 2}))
     } catch (error) {
       toast.error(error.response.data.message|| "Something went wrong")
@@ -102,7 +102,7 @@ const ForgetPassword = () => {
   }, [])
 
   const handleSendOtp = useCallback(() => {
-    axios.post('http://localhost:4000/api/user/forgetPassword/sendOtp',{ number: state.number })
+    axios.post('https://labourease-production.up.railway.app/api/user/forgetPassword/sendOtp',{ number: state.number })
     .then((res)=>{
       toast.success(res.data.message)
       setState((prev)=>({...prev, otp: res.data.otp, otpSent: true}))
@@ -119,7 +119,7 @@ const ForgetPassword = () => {
   }, [cleaTimer, state.otp])
 
   const handlePasswordReset = useCallback(({cnic, newPassword}) => {
-    axios.post('http://localhost:4000/api/user/forgetPassword/resetPassword',{ cnic, newPassword })
+    axios.post('https://labourease-production.up.railway.app/api/user/forgetPassword/resetPassword',{ cnic, newPassword })
     .then((res)=>{
       toast.success(res.data.message)
       navigateTo('/login')

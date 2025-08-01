@@ -20,7 +20,7 @@ function MyServices() {
   useEffect(() => {
     const getAllMyPosts = async () =>{
       setLoading(true)
-      await axios.get('http://localhost:4000/api/work/getMyServices', { withCredentials: true })
+      await axios.get('https://labourease-production.up.railway.app/api/work/getMyServices', { withCredentials: true })
       .then((res)=>{
         setGigs(res.data.myServices)
       })
@@ -35,7 +35,7 @@ function MyServices() {
   const openDialog = useCallback((id) => setState({id, isOpen: true}), [])
 
   const handleDelete = async () =>{
-    await axios.delete(`http://localhost:4000/api/work/delete/${state.id}`,{ withCredentials: true })
+    await axios.delete(`https://labourease-production.up.railway.app/api/work/delete/${state.id}`,{ withCredentials: true })
     .then((res)=>{
       toast.success(res.data.message)
       setGigs(gigs=> gigs.filter(gig=> gig._id !== id))
