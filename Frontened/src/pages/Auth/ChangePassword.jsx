@@ -46,7 +46,7 @@ const ChangePassword = () => {
   const onSubmit = async (data) => {
     delete data.confirmPassword
     
-    axios.patch('https://labourease-production.up.railway.app/api/user/changePassword', data, {withCredentials: true})
+    axios.patch('https://labourease-production.up.railway.app/api/user/changePassword', data, {withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
     .then((res)=>{
       toast.success(res.data.message)
       reset()

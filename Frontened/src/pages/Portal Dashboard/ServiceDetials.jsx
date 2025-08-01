@@ -32,7 +32,7 @@ const ServiceDetials = () => {
 
   const getMyService = useCallback(async () =>{
     try {
-      const { data } = await axios.get(`https://labourease-production.up.railway.app/api/work/getMyService/${id}`, { withCredentials: true })
+      const { data } = await axios.get(`https://labourease-production.up.railway.app/api/work/getMyService/${id}`, { withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} })
       const service = data.myService[0]
       reset(service)
       setValue('salaryType',service.fixedSalary? 'fixed':'range')
@@ -74,7 +74,7 @@ const ServiceDetials = () => {
       }
     }
     
-    await axios.put(`https://labourease-production.up.railway.app/api/work/update/${id}`, formData, { withCredentials: true })
+    await axios.put(`https://labourease-production.up.railway.app/api/work/update/${id}`, formData, { withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} })
     .then((res)=>{
       toast.success(res.data.message)
       setReadOnly(true); // Switch back to read-only mode
@@ -83,7 +83,7 @@ const ServiceDetials = () => {
   };
   
   const handleToggle = async (active) => {
-    await axios.patch(`https://labourease-production.up.railway.app/api/work/updateStatus/${id}`, { active }, { withCredentials:true })
+    await axios.patch(`https://labourease-production.up.railway.app/api/work/updateStatus/${id}`, { active }, { withCredentials:true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} })
     .then((res)=>toast.success(res.data.message))
     .catch((err)=>toast.error(err.response.data.message))   
   }
@@ -97,7 +97,7 @@ const ServiceDetials = () => {
       try {
           const {data} = await axios.post('https://labourease-production.up.railway.app/api/request/postRequest', formData,
               {
-                  withCredentials: true, 
+                  withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}, 
                   headers: { "Content-Type": "multipart/form-data" }
               })
           toast.success(data.message)

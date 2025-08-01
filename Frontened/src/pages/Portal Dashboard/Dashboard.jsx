@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchCompletedRequests = async () =>{
-      axios.get('https://labourease-production.up.railway.app/api/request/getCompleted',{withCredentials:true})
+      axios.get('https://labourease-production.up.railway.app/api/request/getCompleted',{withCredentials:true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}})
       .then((res)=>{
         setCompltedRequests(res.data.requests)
         res.data.requests.forEach(val=>setTotalPayment(prev=>prev+val.salary))

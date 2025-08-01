@@ -38,8 +38,9 @@ function Navbar() {
   const logOut = useCallback(async () => {
     setLoading(true)
     setRole('visitor')
+    localStorage.removeItem('token')
     try {
-      const response = await axios.get('https://labourease-production.up.railway.app/api/user/logout', { withCredentials: true })
+      const response = await axios.get('https://labourease-production.up.railway.app/api/user/logout', { withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} })
       toast.success(response.data.message)
       localStorage.removeItem('role')
       setIsAuthorized(false)

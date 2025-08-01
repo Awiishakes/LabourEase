@@ -38,6 +38,7 @@ const Login = () => {
           "Content-Type": "application/json"
         }
       })
+      localStorage.setItem('token',data.token)
       setLoading(true)
       toast.success(data.message)
     } catch (error) {

@@ -23,7 +23,7 @@ const ImageSocket = ({image, index, onUpload, onDelete, editMode}) => {
         setUploading(true);
         setProgress(0);
         
-        await axios.post('https://labourease-production.up.railway.app/api/request/uploadImage', imageData, {withCredentials:true,
+        await axios.post('https://labourease-production.up.railway.app/api/request/uploadImage', imageData, {withCredentials:true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`},
           onUploadProgress: (progress)=>{
             const percent = Math.round((progress.loaded * 100) / progress.total);
             setProgress(percent);
@@ -41,7 +41,7 @@ const ImageSocket = ({image, index, onUpload, onDelete, editMode}) => {
       }
 
     const handleImageDelete = async () => {
-        await axios.delete(`https://labourease-production.up.railway.app/api/request/deleteImage/${image.public_id}`, {withCredentials:true} )
+        await axios.delete(`https://labourease-production.up.railway.app/api/request/deleteImage/${image.public_id}`, {withCredentials:true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}} )
         .then((res)=>{
             onDelete(index)
             toast.success(res.data.message)

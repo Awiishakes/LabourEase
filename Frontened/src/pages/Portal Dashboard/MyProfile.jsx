@@ -52,7 +52,7 @@ const MyProfile = () => {
       }
     }
 
-    axios.put(`https://labourease-production.up.railway.app/api/user/updateProfile/${user._id}`, formData, { withCredentials: true })
+    axios.put(`https://labourease-production.up.railway.app/api/user/updateProfile/${user._id}`, formData, { withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} })
     .then((res)=>{
       setUser(res.data.updatedUser)
       toast.success(res.data.message)
