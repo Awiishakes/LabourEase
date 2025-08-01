@@ -20,6 +20,7 @@ export default function ContextHolder (props) {
     useEffect(() => {
         console.log(document.cookie.includes('checkToken'))
         const fetchUser = async () => {
+            console.log(document.cookie.includes('checkToken'))
             try {
                 setLoading(true)
                 const response = await axios.get('https://labourease-production.up.railway.app/api/user/getuser', { withCredentials: true })
