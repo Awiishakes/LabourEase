@@ -42,9 +42,9 @@ function Navbar() {
     localStorage.removeItem('token')
     // try {
       // const response = await axios.get('https://labourease-production.up.railway.app/api/user/logout', { withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} })
-      toast.success(response.data.message)
       setIsAuthorized(false)
       setUser([])
+      toast.success('User Logged out!')
       navigateTo('/')
     // } catch (err) {
       // setRole(role)
@@ -56,12 +56,12 @@ function Navbar() {
   const closeSideMenu = useCallback(() => active && setActive(false), [active])
   
   const profileMenuToggle = useCallback(() => {
-      profileMenu.current.classList.toggle('scale-100')
-      profileMenu.current.classList.toggle('duration-200')
+      profileMenu?.current.classList.toggle('scale-100')
+      profileMenu?.current.classList.toggle('duration-200')
   }, [])
   
   const closeProfileMenu = useCallback(() => {
-    if(profileMenu.current.classList.contains('scale-100'))
+    if(profileMenu?.current.classList.contains('scale-100'))
       profileMenuToggle()
     closeSideMenu()
   }, [closeSideMenu, profileMenuToggle])

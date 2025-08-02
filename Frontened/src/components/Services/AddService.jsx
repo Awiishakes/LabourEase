@@ -45,9 +45,10 @@ const AddService = () => {
         
         await axios.post('https://labourease-production.up.railway.app/api/work/postService', formData,
         {
-            withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}, 
+            withCredentials: true, 
             headers: {
-                "Content-Type": "multipart/form-data"
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${localStorage.getItem('token')}`
             }
         })
         .then((res)=>{

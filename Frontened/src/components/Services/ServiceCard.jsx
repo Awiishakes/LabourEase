@@ -17,8 +17,11 @@ const ServiceCard = ({id, image, title, desc, ratings, startTime, endTime, price
         try {
             const {data} = await axios.post('https://labourease-production.up.railway.app/api/request/postRequest', formData,
                 {
-                    withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}, 
-                    headers: { "Content-Type": "multipart/form-data" }
+                    withCredentials: true, 
+                    headers: { 
+                        "Content-Type": "multipart/form-data",
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
+                    }
                 })
             toast.success(data.message)
             return data.success

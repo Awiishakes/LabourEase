@@ -22,10 +22,10 @@ const Sidebar = () => {
     localStorage.removeItem('token')
     // try {
     //   const response = await axios.get('https://labourease-production.up.railway.app/api/user/logout', { withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} })
-      toast.success(response.data.message)
-      setIsAuthorized(false)
-      setUser([])
-      navigateTo('/')
+    setIsAuthorized(false)
+    setUser([])
+    toast.success('User Logged out!')
+    navigateTo('/')
     // } catch (err) {
     //   setRole(role)
     //   toast.error(err.response.data.message)

@@ -9,7 +9,6 @@ export default function ContextHolder (props) {
     // const [isAuthorized, setIsAuthorized] = useState(document.cookie.includes('checkToken'))
     // const [loading, setLoading] = useState(document.cookie.includes('checkToken') || true)
     const [isAuthorized, setIsAuthorized] = useState(localStorage.getItem('token')?.length>0)
-    console.log(localStorage.getItem('token')?.length>0)
     const [loading, setLoading] = useState(localStorage.getItem('token')?.length>0 || true)
     const [user, setUser] = useState(null)
     const [role, setRole] = useState(localStorage.getItem('role')? ['client','worker'].includes(localStorage.getItem('role'))&& localStorage.getItem('role') : 'visitor')
@@ -51,7 +50,7 @@ export default function ContextHolder (props) {
                 setLoading(true)
                 const response = await axios.get('https://labourease-production.up.railway.app/api/user/getuser', { withCredentials: true, headers: {Authorization: `Bearer ${localStorage.getItem('token')}`} })
                 setUser(response.data.user)
-                setIsAuthorized(['client','worker','visitor'].includes(response.data.user.role)?true:false)
+                setIsAuthorized(['client','worker'].includes(response.data.user.role)?true:false)
                 localStorage.setItem('role',['client','worker','visitor'].includes(response.data.user.role)? response.data.user.role : '')
                 setRole(response.data.user.role)
             } catch (error) {
