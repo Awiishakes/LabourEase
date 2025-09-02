@@ -66,7 +66,7 @@ const ServiceCard = ({id, image, title, desc, ratings, startTime, endTime, price
                 </div>
             </div>
             <div>
-                {isModal && <Request woworkerAvailability={{startTime, endTime}} onClose={onClose} onSubmit={onSubmit} workId={id} />}
+                {isModal && <Request workerAvailability={{startTime, endTime}} onClose={onClose} onSubmit={onSubmit} workId={id} />}
             </div>
         </>
     )
