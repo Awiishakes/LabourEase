@@ -1,9 +1,10 @@
-import React, { useCallback, useState } from 'react'
+import  { useCallback, useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { useGlobal } from '../../context/ContextHolder'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import Request from '../Requests/Request'
 
 
 const ServiceCard = ({id, image, title, desc, ratings, startTime, endTime, price, priceFrom, priceTo}) => {
@@ -30,6 +31,8 @@ const ServiceCard = ({id, image, title, desc, ratings, startTime, endTime, price
             return err.response.data.success
         }
     }, [])
+
+  const onClose = useCallback((value) => setIsModal(value), [])
 
     return (
         <>
@@ -59,13 +62,11 @@ const ServiceCard = ({id, image, title, desc, ratings, startTime, endTime, price
                         <button onClick={()=> isAuthorized? setIsModal(true): navigateTo('/login')} className='flex-1 px-2 py-2 bg-yellow-400 hover:bg-yellow-600 hover:text-white rounded-l-xl'>Book Now</button>
                         <Link to={isAuthorized?'/client/serviceDetials/'+id:'/login'} state={{page: pathName==='/home'?'home':'service'}} className='flex-1 text-center px-2 py-2 bg-yellow-400 hover:bg-yellow-600 hover:text-white rounded-r-xl'>See detials</Link>
                     </div>
-{console.log(isAuthorized, isModal)}
-                    {/* Action Buttons */}
-                    {/* <div className="mt-3 flex space-x-2">
-                        <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">View</button>
-                        <button className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600">Book</button>
-                    </div> */}
+                    
                 </div>
+            </div>
+            <div>
+                {isModal && <Request woworkerAvailability={{startTime, endTime}} onClose={onClose} onSubmit={onSubmit} workId={id} />}
             </div>
         </>
     )
