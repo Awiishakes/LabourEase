@@ -59,7 +59,7 @@ const ServiceCard = ({id, image, title, desc, ratings, startTime, endTime, price
                         <button onClick={()=> isAuthorized? setIsModal(true): navigateTo('/login')} className='flex-1 px-2 py-2 bg-yellow-400 hover:bg-yellow-600 hover:text-white rounded-l-xl'>Book Now</button>
                         <Link to={isAuthorized?'/client/serviceDetials/'+id:'/login'} state={{page: pathName==='/home'?'home':'service'}} className='flex-1 text-center px-2 py-2 bg-yellow-400 hover:bg-yellow-600 hover:text-white rounded-r-xl'>See detials</Link>
                     </div>
-
+{console.log(isAuthorized, isModal)}
                     {/* Action Buttons */}
                     {/* <div className="mt-3 flex space-x-2">
                         <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">View</button>
